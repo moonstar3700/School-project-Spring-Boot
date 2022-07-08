@@ -1,0 +1,141 @@
+/*Colors{*/
+/*    colors:*/
+/*    #9F48D9 - Purple*/
+/*    #0F7CBF - Darkblue*/
+/*    #0B8CBF - lightBlue*/
+/*    #F2CB05 - Yellow*/
+/*    #F29F05 - Orange*/
+/*}*/
+
+.navbar {
+    border-radius: 0;
+    background-color: #F29F05;
+    border: none;
+    padding: 1rem;
+    border-bottom: 2px solid #DDDDDD
+}
+
+nav div{
+    background-color: #F29F05;
+}
+
+div.navbar-header a.navbar-brand{
+    font-weight: bold;
+    color: #000000;
+}
+
+nav.navbar.navbar-inverse div.container ul.nav.navbar-nav li a{
+    color: #000000;
+    font-weight: bold;
+}
+
+nav.navbar.navbar-inverse div.container ul.nav.navbar-nav li.active a{
+    background-color: #F2CB05;
+    border-radius: 5px;
+}
+
+
+nav.navbar.navbar-inverse div.container ul.nav.navbar-nav li a:hover{
+    color: #FFFFFF;
+}
+
+thead {
+    background-color: #F2CB05;
+}
+
+label.col-form-label {
+    margin-top: 1rem;
+}
+
+form p.mb-3{
+    margin-bottom: 0;
+}
+
+div.input-group input.form-control {
+    padding: 0 0 0 1rem;
+}
+
+a.btn.btn-default, span.input-group-btn input.btn.btn-default {
+    background-color: #62C2CCFF;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-left: 1rem;
+    border: 1px solid #000000;
+    border-radius: 0;
+}
+
+a.btn.btn-default:active, span.input-group-btn input.btn.btn-default:active{
+    color: #DDDDDD;
+}
+
+a.btn.btn-default:hover, span.input-group-btn input.btn.btn-default:hover{
+    background-color: #9F48D9;
+    border: 1px solid #F2CB05;
+}
+
+input.btn.btn-primary {
+    background-color: #62C2CCFF;
+    border-radius: 0.3rem;
+    border: 2px solid #000000;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+input.btn.btn-primary:hover {
+    background-color: #9F48D9;
+    border: 2px solid #F2CB05;
+    color: #FFFFFF;
+}
+
+input.btn.btn-primary:active {
+    color: #DDDDDD;
+    background-color: #9F48D9;
+}
+
+form p.mb-3 span.alert-danger{
+    padding: 0.2rem;
+    border-radius: 5px;
+}
+
+.loginform {
+    /* background-color: #545D6AFF; */
+    background-color: #62C2CCFF;
+    border-radius: 15px;
+    border: 3px solid #000000;
+    padding: 1rem 4rem 1rem 4rem;
+}
+
+.loginform h1{
+    text-align: center;
+}
+
+.loginform input.btn.btn-primary{
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 2rem;
+    background-color: #9F48D9;
+}
+
+.loginform input.btn.btn-primary:hover{
+    border: 2px solid #000000;
+    background-color: #F2CB05;
+}
+
+.loginform input.form-control{
+    background-color: #4ACBC1FF;
+    border: 2px solid #000000;
+}
+
+.loginform input.form-control::placeholder{
+    color: #000000;
+    opacity: 0.7;
+}
+
+.loginform div.alert-danger {
+    background-color: #FFA4B6;
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: #8F0100FF;
+    border: 2px solid #8F0100FF;
+}

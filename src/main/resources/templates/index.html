@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head::head(title='home')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='index')"></header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Home</h1>
+                <div th:if="${denied}!=null" class="alert-danger">
+                    <span th:text="#{${denied}}"></span>
+                </div>
+                <p>This is the home page for the coin collectors website. Here you can find all the information or
+                    store the information that you as a coin collector could want.</p>
+                <p>De credentials to log in are:</p>
+                <ul>
+                    <li>Name: "user", Password: "t"</li>
+                    <li>Name : "admin", Password "t"</li>
+                </ul>
+
+            </div>
+            <div class="col-sm-4 loginform" sec:authorize="!isAuthenticated()">
+                <h1>Log in</h1>
+                <div th:if="${param.error}" class="alert-danger">
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}" class="alert-danger">
+                    You have been logged out.
+                </div>
+                <form th:action="@{/home}" method="post">
+                    <p class="mb-3">
+                        <label for="username" class="col-form-label">Username:</label>
+                        <input type="text" id="username" placeholder="Username" class="form-control col-sm-5"
+                               name="username">
+                    </p>
+                    <p class="mb-3">
+                        <label for="password" class="col-form-label">Password</label>
+                        <input type="text" id="password" placeholder="Password" class="form-control col-sm-5"
+                               name="password">
+                    </p>
+                    <p>
+                        <input type="submit" value="Sign In" class="btn btn-primary" />
+                    </p>
+                </form>
+            </div>
+            <div class="col-sm-4 loginform" sec:authorize="isAuthenticated()">
+                <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+                <form th:action="@{/logout}" method="post">
+                    <p>
+                        <input type="submit" value="Sign Out" class="btn btn-primary" />
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

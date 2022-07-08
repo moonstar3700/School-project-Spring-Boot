@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='add.coincollection')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='add-coins')"></header>
+<main>
+    <div class="container">
+        <div th:if="${error}!=null" class="alert-danger">
+            <span th:text="${error}"></span>
+        </div>
+        <h1 th:text="#{add.coincollection}"></h1>
+        <form method="post" action="/coins/add" th:object="${muntCollectie}" novalidate>
+            <p class="mb-3">
+                <label for="title" class="col-form-label">Title</label>
+                <input type="text" th:field="*{title}" id="title" placeholder="Title" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('title')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="country" class="col-form-label">Country</label>
+                <input type="text" th:field="*{country}" id="country" placeholder="Country" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('country')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="year" class="col-form-label">Year</label>
+                <input type="number" th:field="*{year}" id="year" placeholder="Year" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('year')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p>
+                <input type="submit" th:value="#{add.coincollection}" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

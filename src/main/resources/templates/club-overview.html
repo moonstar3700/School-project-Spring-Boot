@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head::head(title='club.overview')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='club-overview')"></header>
+<main>
+    <div class="container">
+        <form method="Get" action="/club/search/name">
+            <p class="mb-3">
+                <span th:if="${error} != null" class="alert-danger" th:text="#{${error}}"></span>
+                <label for="zoekNaam" class="col-form-label" th:text="#{search.name}"></label>
+            <div class="input-group">
+                <input type="text" name="zoekNaam" id="zoekNaam" th:placeholder="#{clubname}" class="form-control col-sm-5" th:value="${previousNameValue}">
+                <span class="input-group-btn">
+                        <input type="submit" th:value="#{search.club}" class="btn btn-default">
+                    </span>
+            </div>
+            </p>
+        </form>
+        <form method="Get" action="/club/search/maxmembers">
+            <p class="mb-3">
+                <span th:if="${membererror} != null" class="alert-danger" th:text="#{${membererror}}"></span>
+                <label for="zoekMaxMembers" class="col-form-label" th:text="#{search.maxMembers}"></label>
+            <div class="input-group">
+            <input  type="number" name="zoekMaxMembers" id="zoekMaxMembers" class="form-control col-sm-5" th:value="${previousMaxMembersValue}" placeholder="5">
+                <span class="input-group-btn">
+                        <input type="submit" th:value="#{search.club}" class="btn btn-default">
+                    </span>
+            </div>
+            </p>
+        </form>
+
+        <form method="Get" action="/club/search/maxmembershigher">
+            <p class="mb-3">
+                <span th:if="${maxmembererror} != null" class="alert-danger" th:text="#{${maxmembererror}}"></span>
+                <label for="zoekMaxMembersEnHoger" class="col-form-label" th:text="#{search.maxMembers.higher}"></label>
+            <div class="input-group">
+            <input  type="number" name="zoekMaxMembersEnHoger" id="zoekMaxMembersEnHoger" class="form-control col-sm-5" th:value="${previousMaxMembersHigherValue}" placeholder="5">
+                <span class="input-group-btn">
+                        <input type="submit" th:value="#{search.club}" class="btn btn-default">
+                    </span>
+            </div>
+            </p>
+        </form>
+
+        <form method="GET" action="/club/overview/sort">
+            <p class="mb-3">
+                <label for="sortclub" class="col-form-label" th:text="#{sort.label}"></label>
+            <div class="input-group">
+            <select name="sortclub" id="sortclub" class="form-control col-sm-5">
+                <option value="nameASC" th:text="#{sort.clubOverview.AtoZ}"></option>
+                <option value="nameDESC" th:text="#{sort.clubOverview.ZtoA}"></option>
+                <option value="memberASC" th:text="#{sort.clubOverview.Maxmem}"></option>
+                <option value="memberDESC" th:text="#{sort.clubOverview.Minmem}"></option>
+            </select>
+                <span class="input-group-btn">
+                        <input type="submit" th:value="#{sort}" class="btn btn-default">
+                    </span>
+            </div>
+            </p>
+        </form>
+    </div>
+
+
+    <div th:switch="${clubs.size()}" class="container">
+        <p th:case=0 th:text="#{${message}}"></p>
+        <div th:case="*">
+            <h2>Clubs</h2>
+            <table class="table table-striped table-responsive-lg">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Region</th>
+                    <th>Max members</th>
+                    <th sec:authorize="hasRole('ADMIN')">Update</th>
+                    <th sec:authorize="hasRole('ADMIN')">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="club:${clubs}">
+                    <td th:text="${club.id}"></td>
+                    <td th:text="${club.name}"></td>
+                    <td th:text="${club.email}"></td>
+                    <td th:text="${club.region}"></td>
+                    <td th:text="${club.maxMembers}"></td>
+                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/club/update/{id}(id=${club.id})}" class="btn btn-default">Update</a></td>
+                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/club/delete/{id}(id = ${club.id})}" class="btn btn-default">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <div th:if="${pageYes}">
+                <ul class="pagination" th:each="i: ${#numbers.sequence(1, pageAmount)}">
+                    <li class="page-item" th:if="${currentPage != 1 && i == 1}"><a th:href="@{'/club/overview/'+${currentPage - 1}}">previous</a></li>
+                    <li class="page-item"><a th:if="${currentPage != i}" th:href="@{'/club/overview/'+${i}}">[[${i}]]</a></li>
+                    <li class="page-item active"><span  th:unless="${currentPage!=i}">[[${i}]]</span></li>
+                    <li class="page-item" th:if="${currentPage != pageAmount && i == pageAmount && pageAmount > 1}"><a th:href="@{'/club/overview/'+${currentPage + 1}}">next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

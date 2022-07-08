@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/home">Coin Collectors</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li th:classappend="${current == 'index' ? 'active' : ''}"><a href="/home" th:text="#{home}"></a></li>
+                <li sec:authorize="isAuthenticated()" th:classappend="${current == 'club-overview' ? 'active' : ''}"><a href="/club/overview" th:text="#{club.overview}"></a></li>
+                <li sec:authorize="hasRole('ADMIN')" th:classappend="${current == 'add-club' ? 'active' : ''}"><a href="/club/add" th:text="#{add.club}"></a></li>
+                <li sec:authorize="isAuthenticated()" th:classappend="${current == 'coins-overview' ? 'active' : ''}"><a href="/coins/overview" th:text="#{coin.overview}"></a></li>
+                <li sec:authorize="hasRole('ADMIN')" th:classappend="${current == 'add-coins' ? 'active' : ''}"><a href="/coins/add" th:text="#{add.coincollection}"></a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='update.club')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='update-club')"></header>
+<main>
+    <div class="container">
+        <h1>Update club</h1>
+        <form action="#" th:action="@{/club/update/{id}(id=${club.id})}" th:object="${club}"
+              method="post">
+            <p class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('name')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('email')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="region" class="form-label">Region</label>
+                <input type="text" th:field="*{region}" id="region" placeholder="Region" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('region')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="maxMembers" class="form-label">Max number of members</label>
+                <input type="number" th:field="*{maxMembers}" id="maxMembers" placeholder="Max number of members" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('maxMembers')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p>
+                <input type="submit" th:value="#{update.club}" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

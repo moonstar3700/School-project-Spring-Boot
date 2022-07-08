@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head::head(title='error')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='error')"></header>
+<main>
+    <div class="container">
+        <h1 th:text="#{error404}"></h1>
+    </div>
+
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

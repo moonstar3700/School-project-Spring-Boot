@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='search.club')">
+</head>
+<body>
+<header th:replace="fragments/header::header(current='search-club')">
+</header>
+<main>
+  <div class="container">
+    <h2>Clubs</h2>
+    <form method="POST" action="/club/zoekOpNaam">
+      <p class="mb-3">
+        <label for="zoekNaam" class="col-form-label" th:text="#{search.name}"></label>
+        <input  type="text" name="zoekNaam" id="zoekNaam" th:placeholder="#{clubname}" class="form-control col-sm-5" th:value="${previousNameValue}">
+        <span th:if="${error} != null" class="alert-danger" th:text="#{${error}}"></span>
+      </p>
+      <p>
+        <input type="submit" th:value="#{search.club}" class="btn btn-primary">
+      </p>
+    </form>
+    <form method="POST" action="/club/zoekOpMaxMembers">
+      <p class="mb-3">
+        <label for="zoekMaxMembers" class="col-form-label" th:text="#{search.maxMembers}"></label>
+        <input  type="number" name="zoekMaxMembers" id="zoekMaxMembers" class="form-control col-sm-5" th:value="${previousMaxMembersValue}" placeholder="5">
+        <span th:if="${membererror} != null" class="alert-danger" th:text="#{${membererror}}"></span>
+      </p>
+      <p>
+        <input type="submit" th:value="#{search.club}" class="btn btn-primary">
+      </p>
+    </form>
+
+    <form method="POST" action="/club/zoekOpMaxMembersEnHoger">
+      <p class="mb-3">
+        <label for="zoekMaxMembersEnHoger" class="col-form-label" th:text="#{search.maxMembers.higher}"></label>
+        <input  type="number" name="zoekMaxMembersEnHoger" id="zoekMaxMembersEnHoger" class="form-control col-sm-5" th:value="${previousMaxMembersHigherValue}" placeholder="5">
+        <span th:if="${maxmembererror} != null" class="alert-danger" th:text="#{${maxmembererror}}"></span>
+      </p>
+      <p>
+        <input type="submit" th:value="#{search.club}" class="btn btn-primary">
+      </p>
+    </form>
+    <div th:if="${clubs != null}">
+      <div th:switch="${clubs.size()}">
+        <h3 th:case="0" th:text="#{no.results.found}"></h3>
+        <table th:case="*" class="table table-striped table-responsive-lg">
+          <thead>
+          <tr>
+            <th th:text="naam"></th>
+            <th th:text="email"></th>
+            <th th:text="regio"></th>
+            <th th:text="maxAantalLeden"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="c:${clubs}">
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.email}"></td>
+            <td th:text="${c.region}"></td>
+            <td th:text="${c.maxMembers}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='add.club')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='add-club')"></header>
+<main>
+    <div class="container">
+        <h1 th:text="#{add.club}"></h1>
+        <form method="post" action="/club/add" th:object="${club}" novalidate>
+            <p class="mb-3">
+                <label for="name" class="col-form-label">Name</label>
+                <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('name')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="email" class="col-form-label">Email</label>
+                <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('email')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="region" class="col-form-label">Region</label>
+                <input type="text" th:field="*{region}" id="region" placeholder="Region" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('region')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="maxMembers" class="col-form-label">Max members</label>
+                <input type="number" th:field="*{maxMembers}" id="maxMembers" placeholder="Max members" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('maxMembers')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p>
+                <input type="submit" th:value="#{add.club}" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

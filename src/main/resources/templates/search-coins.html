@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='search.coins')">
+</head>
+<body>
+<header th:replace="fragments/header::header(current='search-coins')">
+</header>
+<main>
+    <div class="container">
+        <h2 th:text="#{coins}"></h2>
+        <form method="POST" action="/coins/searchByCountry">
+            <p class="mb-3">
+                <label for="country" class="col-form-label" th:text="#{search.country}"></label>
+                <input  type="text" name="country" id="country" th:placeholder="#{country}" class="form-control col-sm-5" th:value="${previousCountryValue}">
+                <span th:if="${error} != null" class="alert-danger" th:text="#{${error}}"></span>
+            </p>
+            <p>
+                <input type="submit" th:value="#{search.country}" class="btn btn-primary">
+            </p>
+        </form>
+        <form method="POST" action="/coins/searchByYear">
+            <p class="mb-3">
+                <label for="year" class="col-form-label" th:text="#{search.year}"></label>
+                <input  type="number" name="year" id="year"class="form-control col-sm-5" th:value="${previousYearValue}" placeholder="520">
+                <span th:if="${yearerror} != null" class="alert-danger" th:text="#{${yearerror}}"></span>
+            </p>
+            <p>
+                <input type="submit" th:value="#{search.year}" class="btn btn-primary">
+            </p>
+        </form>
+        <form method="POST" action="/coins/searchUntilYear">
+            <p class="mb-3">
+                <label for="endyear" class="col-form-label" th:text="#{search.until.year}"></label>
+                <input  type="number" name="endyear" id="endyear"class="form-control col-sm-5" th:value="${previousUntilYearValue}" placeholder="1900">
+                <span th:if="${endyearerror} != null" class="alert-danger" th:text="#{${endyearerror}}"></span>
+            </p>
+            <p>
+                <input type="submit" th:value="#{search.until.year}" class="btn btn-primary">
+            </p>
+        </form>
+        <div th:if="${coins != null}">
+            <div th:switch="${coins.size()}">
+                <h3 th:case="0" th:text="#{no.results.found}"></h3>
+                <table th:case="*" class="table table-striped table-responsive-lg">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Country</th>
+                            <th>Year</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="coin:${coins}">
+                            <td th:text="${coin.id}"></td>
+                            <td th:text="${coin.title}"></td>
+                            <td th:text="${coin.country}"></td>
+                            <td th:text="${coin.year}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
