@@ -1,11 +1,7 @@
 package be.ucll.ip.minor.groep1209.controller;
 
-import be.ucll.ip.minor.groep1209.domain.model.Club;
-import be.ucll.ip.minor.groep1209.domain.model.DomainException;
-import be.ucll.ip.minor.groep1209.domain.model.MuntCollectie;
-import be.ucll.ip.minor.groep1209.domain.model.Verzamelaar;
+import be.ucll.ip.minor.groep1209.domain.model.*;
 import be.ucll.ip.minor.groep1209.domain.service.*;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
@@ -14,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -24,6 +18,9 @@ public class Controller {
 
     @Autowired
     private MuntCollectieService muntCollectieService;
+
+    @Autowired
+    private ClubhuisService clubhuisService;
 
     @GetMapping("/home")
     public String home(){
@@ -421,4 +418,25 @@ public class Controller {
         }
         return "redirect:/coins/overview";
     }
+
+    @GetMapping("/clubhuis/overview")
+    public String clubhuisOverview(Model model){
+        try {
+            List<Clubhuis> list = clubhuisService.findAll();
+            if (list.size() == 0){
+                model.addAttribute("message", "no.house.found");
+            }
+            model.addAttribute("clubhuizen", list);
+        }
+        catch (IllegalArgumentException | ServiceException e){
+            model.addAttribute("error", e.getMessage());
+        }
+        return "clubhuis-overview";
+    }
+
+    @GetMapping("/clubhuis/add")
+    public String clubhuisAdd(Clubhuis clubhuis){
+        return "clubhuis-add";
+    }
+
 }
