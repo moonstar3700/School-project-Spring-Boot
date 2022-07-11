@@ -7,10 +7,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@IdClass(CompPK.class)
 public class Clubhuis {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     @NotBlank(message = "name.missing")
     private String name;
 
@@ -22,7 +24,6 @@ public class Clubhuis {
     @NotNull(message = "not.a.number")
     private Integer maxMembers;
 
-    @Id
     @NotBlank(message = "gemeente.missing")
     private String gemeente;
 
@@ -41,4 +42,8 @@ public class Clubhuis {
     public String getGemeente() { return gemeente; }
 
     public void setGemeente(String gemeente) { this.gemeente = gemeente; }
+
+    public long getId() { return id; }
+
+    public void setId(long id) { this.id = id; }
 }

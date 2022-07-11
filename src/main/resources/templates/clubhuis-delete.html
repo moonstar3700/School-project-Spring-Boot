@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head (title='clubhuis.delete')">
+</head>
+<body>
+<header th:replace="fragments/header::header (current='delete-clubhuis')">
+</header>
+<main>
+    <div class="container">
+        <h2>Delete Clubhouse</h2>
+        <h3 th:if="${error} != null" class="alert-danger" th:text="#{${error}}"></h3>
+        <form method="POST" th:action="@{/clubhuis/delete/{id}(id = ${clubhuis.id})}"  th:object="${clubhuis}">
+            <p>Are you sure u want to delete this club: </p>
+            <ul>
+                <li>Name: <b th:text="${clubhuis.name}"></b></li>
+                <li>E-mail: <b th:text="${clubhuis.email}"></b></li>
+                <li>Region: <b th:text="${clubhuis.gemeente}"></b></li>
+                <li>Max number of members: <b th:text="${clubhuis.maxMembers}"></b></li>
+            </ul>
+            <p>
+                <input type="submit" th:value="#{clubhuis.delete}" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+
+</main>
+</body>
+</html>

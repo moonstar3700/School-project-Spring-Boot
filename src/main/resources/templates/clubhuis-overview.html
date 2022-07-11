@@ -12,6 +12,7 @@
             <table class="table table-striped table-responsive-lg">
                 <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Naam</th>
                     <th>Email contact persoon</th>
                     <th>Gemeente</th>
@@ -22,12 +23,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="huis:${clubhuizen}">
+                    <td th:text="${huis.id}"></td>
                     <td th:text="${huis.name}"></td>
                     <td th:text="${huis.email}"></td>
                     <td th:text="${huis.gemeente}"></td>
                     <td th:text="${huis.maxMembers}"></td>
-                    <!--<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/coins/update/{id}(id=${coin.id})}" class="btn btn-default">Update</a></td>
-                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/coins/delete/{id}(id = ${coin.id})}" class="btn btn-default">Delete</a></td>-->
+                    <!--<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/coins/update/{id}(id=${coin.id})}" class="btn btn-default">Update</a></td>-->
+                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/clubhuis/delete/{id}(id = ${huis.id})}" class="btn btn-default">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

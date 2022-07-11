@@ -453,4 +453,29 @@ public class Controller {
         return "redirect:/clubhuis/overview";
     }
 
+    @GetMapping("/clubhuis/delete/{id}")
+    public String getDeleteClubhuis(@PathVariable("id") Long id, Model model){
+        try {
+            Clubhuis clubhuis = clubhuisService.findClubhuis(id).orElseThrow(()->new IllegalArgumentException("clubhuis.not.exists"));
+            model.addAttribute("clubhuis", clubhuis);
+        }
+        catch (IllegalArgumentException e){
+            model.addAttribute("error", e.getMessage());
+            return "index";
+        }
+        return "clubhuis-delete";
+    }
+
+    @PostMapping("/clubhuis/delete/{id}")
+    public String deleteClubhuis(@PathVariable("id") Long id, Model model){
+        try {
+            clubhuisService.deleteById(id);
+        }
+        catch (IllegalArgumentException e){
+            model.addAttribute("error", e.getMessage());
+            return getDeleteClubhuis(id, model);
+        }
+        return "redirect:/clubhuis/overview";
+    }
+
 }

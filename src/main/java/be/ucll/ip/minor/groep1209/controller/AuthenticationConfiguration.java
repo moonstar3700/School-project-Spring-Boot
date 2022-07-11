@@ -41,6 +41,8 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/h2/**").permitAll()
                     .antMatchers("/css/Stylesheet.css").permitAll()
                     .antMatchers("/favicon.ico").permitAll()
+                    .antMatchers("/clubhuis/overview").authenticated()
+                    .antMatchers("/clubhuis/**").hasRole("ADMIN")
                     .and()
                 .formLogin()
                     .loginPage("/home").permitAll()

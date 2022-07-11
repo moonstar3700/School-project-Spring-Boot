@@ -5,7 +5,9 @@ import be.ucll.ip.minor.groep1209.domain.model.DomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubhuisService {
@@ -23,5 +25,12 @@ public class ClubhuisService {
             throw new DomainException("clubhuis.name.gemeente.exists");
         }
         clubhuisRepository.save(clubhuis);
+    }
+
+    public Optional<Clubhuis> findClubhuis(Long id) { return clubhuisRepository.findById(id); }
+
+    public void deleteById(Long id) {
+        Clubhuis clubhuis = clubhuisRepository.findById(id).orElseThrow(() -> new ServiceException("delete", "club.not.exists"));
+        clubhuisRepository.delete(clubhuis);
     }
 }
