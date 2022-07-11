@@ -30,7 +30,14 @@ public class ClubhuisService {
     public Optional<Clubhuis> findClubhuis(Long id) { return clubhuisRepository.findById(id); }
 
     public void deleteById(Long id) {
-        Clubhuis clubhuis = clubhuisRepository.findById(id).orElseThrow(() -> new ServiceException("delete", "club.not.exists"));
+        Clubhuis clubhuis = clubhuisRepository.findById(id).orElseThrow(() -> new ServiceException("delete", "clubhuis.not.exists"));
         clubhuisRepository.delete(clubhuis);
+    }
+
+    public void updateHuis(Clubhuis clubhuis) {
+        if (clubhuisRepository.existsByNameAndGemeente(clubhuis.getName(), clubhuis.getGemeente()) && !clubhuisRepository.existsByNameAndGemeenteAndId(clubhuis.getName(), clubhuis.getGemeente(), clubhuis.getId())){
+            throw new DomainException("clubhuis.name.gemeente.exists");
+        }
+        clubhuisRepository.save(clubhuis);
     }
 }

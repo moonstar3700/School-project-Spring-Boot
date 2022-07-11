@@ -4,6 +4,9 @@
 <body>
 <header th:replace="fragments/header :: header(current='clubhuis-overview')"></header>
 <main>
+    <div class="container">
+        <span th:if="${error} != null" class="alert-danger" th:text="#{${error}}"></span>
+    </div>
 
     <div th:switch="${clubhuizen.size()}" class="container">
         <p th:case=0 th:text="#{${message}}"></p>
@@ -28,7 +31,7 @@
                     <td th:text="${huis.email}"></td>
                     <td th:text="${huis.gemeente}"></td>
                     <td th:text="${huis.maxMembers}"></td>
-                    <!--<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/coins/update/{id}(id=${coin.id})}" class="btn btn-default">Update</a></td>-->
+                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/clubhuis/update/{id}(id=${huis.id})}" class="btn btn-default">Update</a></td>
                     <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/clubhuis/delete/{id}(id = ${huis.id})}" class="btn btn-default">Delete</a></td>
                 </tr>
                 </tbody>

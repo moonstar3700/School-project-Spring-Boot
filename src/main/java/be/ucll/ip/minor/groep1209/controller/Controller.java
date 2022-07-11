@@ -456,12 +456,12 @@ public class Controller {
     @GetMapping("/clubhuis/delete/{id}")
     public String getDeleteClubhuis(@PathVariable("id") Long id, Model model){
         try {
-            Clubhuis clubhuis = clubhuisService.findClubhuis(id).orElseThrow(()->new IllegalArgumentException("clubhuis.not.exists"));
+            Clubhuis clubhuis = clubhuisService.findClubhuis(id).orElseThrow(()->new IllegalArgumentException("clubhuis.not.exists.delete"));
             model.addAttribute("clubhuis", clubhuis);
         }
         catch (IllegalArgumentException e){
             model.addAttribute("error", e.getMessage());
-            return "index";
+            return clubhuisOverview(model);
         }
         return "clubhuis-delete";
     }
@@ -477,5 +477,74 @@ public class Controller {
         }
         return "redirect:/clubhuis/overview";
     }
+
+    @GetMapping("/clubhuis/update/{id}")
+    public String updateClubhuis(@PathVariable("id") long id, Model model){
+        try {
+            Clubhuis clubhuis = clubhuisService.findClubhuis(id).orElseThrow(()->new IllegalArgumentException("clubhuis.not.exists.update"));
+            model.addAttribute(clubhuis);
+        }
+        catch (IllegalArgumentException exc) {
+            model.addAttribute("error", exc.getMessage());
+            return clubhuisOverview(model);
+        }
+        return "clubhuis-update";
+    }
+
+    @PostMapping("/clubhuis/update/{id}")
+    public String updateClubhuis(@PathVariable("id") long id, @Valid Clubhuis clubhuis, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            System.out.println("ERRORS UPDATING");
+            clubhuis.setId(id);
+            model.addAttribute("clubhuis", clubhuis);
+            return "clubhuis-update";
+        }
+        try {
+            clubhuisService.updateHuis(clubhuis);
+        } catch (DomainException exc){
+            result.rejectValue("name", null , exc.getMessage());
+            return "clubhuis-update";
+        } catch (ServiceException e){
+            result.rejectValue(e.getAction(), null, e.getMessage());
+            return "clubhuis-update";
+        }
+        return "redirect:/clubhuis/overview";
+    }
+
+    /*
+    @GetMapping("/club/update/{id}")
+    public String updateClub(@PathVariable("id") long id, Model model){
+        try {
+            Club club = clubService.findClub(id).orElseThrow(()->new IllegalArgumentException("club.not.exists"));
+            model.addAttribute(club);
+        }
+        catch (IllegalArgumentException exc) {
+            model.addAttribute("error", exc.getMessage());
+            return "index";
+        }
+        return "update-club";
+    }
+
+    @PostMapping("/club/update/{id}")
+    public String updateClub(@PathVariable("id") long id, @Valid Club club, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            System.out.println("ERRORS UPDATING");
+            club.setId(id);
+            model.addAttribute("club", club);
+            return "update-club";
+        }
+        try {
+            clubService.updateClub(club);
+        } catch (DomainException exc){
+            result.rejectValue("name", null , exc.getMessage());
+            return "update-club";
+        } catch (ServiceException e){
+            result.rejectValue(e.getAction(), null, e.getMessage());
+            return "update-club";
+        }
+        return "redirect:/club/overview";
+    }
+     */
+
 
 }

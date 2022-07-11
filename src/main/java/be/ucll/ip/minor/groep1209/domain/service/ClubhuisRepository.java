@@ -12,4 +12,5 @@ public interface ClubhuisRepository extends JpaRepository<Clubhuis, Long> {
     List<Clubhuis> findAll();
 
     boolean existsByNameAndGemeente(String name, String gemeente);
+    boolean existsByNameAndGemeenteAndId(String name, String gemeente, long id);
 }
