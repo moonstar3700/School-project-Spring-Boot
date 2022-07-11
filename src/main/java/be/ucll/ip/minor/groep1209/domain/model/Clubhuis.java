@@ -2,6 +2,7 @@ package be.ucll.ip.minor.groep1209.domain.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -10,13 +11,14 @@ import javax.validation.constraints.NotNull;
 public class Clubhuis {
 
     @Id
-    @NotBlank(message = "naam.missing")
+    @NotBlank(message = "name.missing")
     private String name;
 
     @NotBlank(message = "email.missing")
     @Email(message = "email.not.valid")
     private String email;
 
+    @Min(value = 0, message = "members.positive.number")
     @NotNull(message = "not.a.number")
     private Integer maxMembers;
 

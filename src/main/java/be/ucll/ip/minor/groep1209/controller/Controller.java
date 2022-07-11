@@ -435,8 +435,22 @@ public class Controller {
     }
 
     @GetMapping("/clubhuis/add")
-    public String clubhuisAdd(Clubhuis clubhuis){
+    public String clubhuisAddPage(Clubhuis clubhuis){
         return "clubhuis-add";
+    }
+
+    @PostMapping("/clubhuis/add")
+    public String clubhuisAdd(@Valid Clubhuis clubhuis, BindingResult result, Model model){
+        if (result.hasErrors()){
+            return "clubhuis-add";
+        }
+        try {
+            clubhuisService.saveClubhuis(clubhuis);
+        } catch (DomainException exc){
+            result.rejectValue("name", null, exc.getMessage());
+            return "clubhuis-add";
+        }
+        return "redirect:/clubhuis/overview";
     }
 
 }

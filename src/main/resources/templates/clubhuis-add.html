@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head::head(title='add.clubhouse')"></head>
+<head th:replace="fragments/head::head(title='add.clubhuis')"></head>
 <body>
-<header th:replace="fragments/header :: header(current='add-clubhouse')"></header>
+<header th:replace="fragments/header :: header(current='add-clubhuis')"></header>
 <main>
     <div class="container">
-        <h1 th:text="#{add.clubhouse}"></h1>
+        <h1 th:text="#{add.clubhuis}"></h1>
         <form method="post" action="/clubhuis/add" th:object="${clubhuis}" novalidate>
             <p class="mb-3">
                 <label for="name" class="col-form-label">Name</label>
@@ -18,8 +18,8 @@
                 <span th:each="error:${#fields.errors('email')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="region" class="col-form-label">Region</label>
-                <input type="text" th:field="*{gemeente}" id="region" placeholder="Region" class="form-control col-sm-5">
+                <label for="gemeente" class="col-form-label">Municipality</label>
+                <input type="text" th:field="*{gemeente}" id="gemeente" placeholder="Municipality" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('gemeente')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
@@ -28,7 +28,7 @@
                 <span th:each="error:${#fields.errors('maxMembers')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p>
-                <input type="submit" th:value="#{add.clubhouse}" class="btn btn-primary">
+                <input type="submit" th:value="#{add.clubhuis}" class="btn btn-primary">
             </p>
         </form>
     </div>

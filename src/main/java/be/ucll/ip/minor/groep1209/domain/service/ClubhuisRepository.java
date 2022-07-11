@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface ClubhuisRepository extends JpaRepository<Clubhuis, Long> {
     List<Clubhuis> findAll();
+
+    boolean existsByNameAndGemeente(String name, String gemeente);
 }
