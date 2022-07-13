@@ -7,14 +7,14 @@
 </header>
 <main>
     <div class="container">
-        <h2>Delete Clubhouse</h2>
+        <h2 th:text="#{clubhuis.delete.title}"></h2>
         <h3 th:if="${error} != null" class="alert-danger" th:text="#{${error}}"></h3>
         <form method="POST" th:action="@{/clubhuis/delete/{id}(id = ${clubhuis.id})}"  th:object="${clubhuis}">
-            <p>Are you sure u want to delete this club: </p>
+            <p th:text="#{clubhuis.delete.message}"></p>
             <ul>
                 <li>Name: <b th:text="${clubhuis.name}"></b></li>
                 <li>E-mail: <b th:text="${clubhuis.email}"></b></li>
-                <li>Region: <b th:text="${clubhuis.gemeente}"></b></li>
+                <li>Municipal: <b th:text="${clubhuis.gemeente}"></b></li>
                 <li>Max number of members: <b th:text="${clubhuis.maxMembers}"></b></li>
             </ul>
             <p>

@@ -5,26 +5,26 @@
 <header th:replace="fragments/header :: header(current='update-clubhuis')"></header>
 <main>
     <div class="container">
-        <h1>Update clubhouse</h1>
+        <h1 th:text="#{clubhuis.update.title}"></h1>
         <form action="#" th:action="@{/clubhuis/update/{id}(id=${clubhuis.id})}" th:object="${clubhuis}"
               method="post">
             <p class="mb-3">
-                <label for="name" class="form-label">Name</label>
+                <label for="name" class="form-label" th:text="#{clubhuis.overzicht.name}"></label>
                 <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('name')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label" th:text="#{clubhuis.overzicht.email}"></label>
                 <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('email')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="gemeente" class="form-label">Municipal</label>
+                <label for="gemeente" class="form-label" th:text="#{clubhuis.overzicht.gemeente}"></label>
                 <input type="text" th:field="*{gemeente}" id="gemeente" placeholder="Gemeente" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('gemeente')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="maxMembers" class="form-label">Max number of members</label>
+                <label for="maxMembers" class="form-label" th:text="#{clubhuis.overzicht.maxMemebers}"></label>
                 <input type="number" th:field="*{maxMembers}" id="maxMembers" placeholder="Max number of members" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('maxMembers')}" th:text="#{${error}}" class="text-danger"></span>
             </p>

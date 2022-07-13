@@ -8,23 +8,23 @@
         <h1 th:text="#{add.clubhuis}"></h1>
         <form method="post" action="/clubhuis/add" th:object="${clubhuis}" novalidate>
             <p class="mb-3">
-                <label for="name" class="col-form-label">Name</label>
-                <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control col-sm-5">
+                <label for="name" class="col-form-label" th:text="#{clubhuis.overzicht.name}"></label>
+                <input type="text" th:field="*{name}" id="name" th:placeholder="#{clubhuis.overzicht.name}"  class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('name')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="email" class="col-form-label">Email</label>
-                <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control col-sm-5">
+                <label for="email" class="col-form-label" th:text="#{clubhuis.overzicht.email}"></label>
+                <input type="text" th:field="*{email}" id="email" th:placeholder="#{clubhuis.overzicht.email}" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('email')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="gemeente" class="col-form-label">Municipality</label>
-                <input type="text" th:field="*{gemeente}" id="gemeente" placeholder="Municipality" class="form-control col-sm-5">
+                <label for="gemeente" class="col-form-label" th:text="#{clubhuis.overzicht.gemeente}"></label>
+                <input type="text" th:field="*{gemeente}" id="gemeente" th:placeholder="#{clubhuis.overzicht.gemeente}" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('gemeente')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p class="mb-3">
-                <label for="maxMembers" class="col-form-label">Max members</label>
-                <input type="number" th:field="*{maxMembers}" id="maxMembers" placeholder="Max members" class="form-control col-sm-5">
+                <label for="maxMembers" class="col-form-label" th:text="#{clubhuis.overzicht.maxMemebers}"></label>
+                <input type="number" th:field="*{maxMembers}" id="maxMembers" th:placeholder="#{clubhuis.overzicht.maxMemebers}" class="form-control col-sm-5">
                 <span th:each="error:${#fields.errors('maxMembers')}" th:text="#{${error}}" class="text-danger"></span>
             </p>
             <p>
