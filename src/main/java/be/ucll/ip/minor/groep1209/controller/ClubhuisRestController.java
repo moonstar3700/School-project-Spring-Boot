@@ -27,7 +27,7 @@ public class ClubhuisRestController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/overview")
+    @GetMapping("/all")
     public Iterable<Clubhuis> getAll (){
 
         return service.findAll();
@@ -56,14 +56,24 @@ public class ClubhuisRestController {
         return getAll();
     }
 
-    @DeleteMapping("/delete/{id}")
-    public Iterable<Clubhuis> delete(@PathVariable("id") long id){
+    @DeleteMapping("/delete")
+    public Iterable<Clubhuis> delete(@RequestParam(name = "id") String id){
+        if (id == null){
+            System.out.println("\n\n\nempty\n\n\n");
+        }
         try{
-            service.deleteById(id);
-        } catch (ServiceException e){
+            System.out.println("\n\n\n" + id  + "\n\n\n");
+
+            service.deleteById(Long.parseLong(id));
+        } catch (ServiceException |DomainException e){
             throw new ServiceException("delete", e.getMessage());
         }
         return service.findAll();
+    }
+
+    @GetMapping("/search/{gemeente}")
+    public Iterable<Clubhuis> search(@PathVariable("gemeente") String gemeente){
+        return service.findAllIncludingGemeente(gemeente);
     }
 
 

@@ -59,4 +59,8 @@ public class ClubhuisService {
     public ClubhuisRepository getClubhuisRepository() {
         return clubhuisRepository;
     }
+
+    public List<Clubhuis> findAllIncludingGemeente(String gemeente){
+        return clubhuisRepository.findAllByGemeenteContainingIgnoreCase(gemeente);
+    }
 }

@@ -13,6 +13,7 @@ public interface ClubhuisRepository extends JpaRepository<Clubhuis, Long> {
     List<Clubhuis> findAllByMaxMembersBefore(int until);
     List<Clubhuis> findAllByMaxMembersAfter(int from);
     List<Clubhuis> findAllByMaxMembersAfterAndMaxMembersBefore(int from, int until);
+    List<Clubhuis> findAllByGemeenteContainingIgnoreCase(String gemeente);
 
     boolean existsByNameAndGemeente(String name, String gemeente);
     boolean existsByNameAndGemeenteAndId(String name, String gemeente, long id);
