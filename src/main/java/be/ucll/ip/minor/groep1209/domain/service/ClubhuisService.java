@@ -40,4 +40,20 @@ public class ClubhuisService {
         }
         clubhuisRepository.save(clubhuis);
     }
+
+    public List<Clubhuis> findAllMaxMembersUntil(int until) {
+        return clubhuisRepository.findAllByMaxMembersBefore(until);
+
+    }
+
+    public List<Clubhuis> findAllMaxMembersFrom(int from) {
+        return clubhuisRepository.findAllByMaxMembersAfter(from);
+
+    }
+
+    public List<Clubhuis> findAllMinAndMaxMembersFromUntil(int from, int until) {
+        return clubhuisRepository.findAllByMaxMembersAfterAndMaxMembersBefore(from, until);
+
+    }
+
 }

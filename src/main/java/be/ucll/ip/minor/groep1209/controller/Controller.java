@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -511,40 +512,56 @@ public class Controller {
         return "redirect:/clubhuis/overview";
     }
 
-    /*
-    @GetMapping("/club/update/{id}")
-    public String updateClub(@PathVariable("id") long id, Model model){
-        try {
-            Club club = clubService.findClub(id).orElseThrow(()->new IllegalArgumentException("club.not.exists"));
-            model.addAttribute(club);
-        }
-        catch (IllegalArgumentException exc) {
-            model.addAttribute("error", exc.getMessage());
-            return "index";
-        }
-        return "update-club";
+    @GetMapping("/clubhuis/filterPage")
+    public String toFilterClubhuis(Model model){
+
+            model.addAttribute("clean", false);
+            model.addAttribute("clubhuizen", new ArrayList<>());
+
+        return "clubhuis-filter";
     }
 
-    @PostMapping("/club/update/{id}")
-    public String updateClub(@PathVariable("id") long id, @Valid Club club, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            System.out.println("ERRORS UPDATING");
-            club.setId(id);
-            model.addAttribute("club", club);
-            return "update-club";
-        }
+    @GetMapping("/clubhuis/filter")
+    public String filterClubhuis(Model model, @RequestParam(name = "From", required = false) String from, @RequestParam(name = "Until", required = false) String until){
         try {
-            clubService.updateClub(club);
-        } catch (DomainException exc){
-            result.rejectValue("name", null , exc.getMessage());
-            return "update-club";
-        } catch (ServiceException e){
-            result.rejectValue(e.getAction(), null, e.getMessage());
-            return "update-club";
+            if (from.isEmpty() && until.isEmpty()){
+                model.addAttribute("filtererror", "clubhuis.filter.error");
+                toFilterClubhuis(model);
+            }
+            else if (from.isEmpty()){
+                model.addAttribute("clean", true);
+                List<Clubhuis> list = clubhuisService.findAllMaxMembersUntil(Integer.parseInt(until));
+                if (list.size() == 0){
+                    model.addAttribute("message", "no.house.found.filter");
+                }
+                model.addAttribute("clubhuizen", list);
+                model.addAttribute("previousUntilValue", Integer.parseInt(until));
+            }
+            else if (until.isEmpty()){
+                model.addAttribute("clean", true);
+                List<Clubhuis> list = clubhuisService.findAllMaxMembersFrom(Integer.parseInt(from));
+                if (list.size() == 0){
+                    model.addAttribute("message", "no.house.found.filter");
+                }
+                model.addAttribute("clubhuizen", list);
+                model.addAttribute("previousFromValue", Integer.parseInt(from));
+            }
+            else {
+                model.addAttribute("clean", true);
+                List<Clubhuis> list = clubhuisService.findAllMinAndMaxMembersFromUntil(Integer.parseInt(from), Integer.parseInt(until));
+                if (list.size() == 0){
+                    model.addAttribute("message", "no.house.found.filter");
+                }
+                model.addAttribute("clubhuizen", list);
+                model.addAttribute("previousUntilValue", Integer.parseInt(until));
+                model.addAttribute("previousFromValue", Integer.parseInt(from));
+            }
         }
-        return "redirect:/club/overview";
+        catch (IllegalArgumentException | ServiceException e){
+            model.addAttribute("error", e.getMessage());
+        }
+        return "clubhuis-filter";
     }
-     */
 
 
 }
