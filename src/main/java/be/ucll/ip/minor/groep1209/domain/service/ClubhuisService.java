@@ -56,4 +56,7 @@ public class ClubhuisService {
 
     }
 
+    public ClubhuisRepository getClubhuisRepository() {
+        return clubhuisRepository;
+    }
 }
