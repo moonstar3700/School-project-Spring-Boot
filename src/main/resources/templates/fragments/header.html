@@ -14,9 +14,9 @@
                 <li sec:authorize="hasRole('ADMIN')" th:classappend="${current == 'add-club' ? 'active' : ''}"><a href="/club/add" th:text="#{add.club}"></a></li>
                 <li sec:authorize="isAuthenticated()" th:classappend="${current == 'coins-overview' ? 'active' : ''}"><a href="/coins/overview" th:text="#{coin.overview}"></a></li>
                 <li sec:authorize="hasRole('ADMIN')" th:classappend="${current == 'add-coins' ? 'active' : ''}"><a href="/coins/add" th:text="#{add.coincollection}"></a></li>
-                <li sec:authorize="isAuthenticated()" th:classappend="${current == 'clubhuis-overview' ? 'active' : ''}"><a href="/clubhuis/overview" th:text="#{clubhuis.overview}"></a></li>
+                <li th:classappend="${current == 'clubhuis-overview' ? 'active' : ''}"><a href="/clubhuis/overview" th:text="#{clubhuis.overview}"></a></li>
                 <li sec:authorize="isAuthenticated()" th:classappend="${current == 'add-clubhuis' ? 'active' : ''}"><a href="/clubhuis/add" th:text="#{add.clubhuis}"></a></li>
-                <li sec:authorize="isAuthenticated()" th:classappend="${current == 'clubhuis-filter' ? 'active' : ''}"><a href="/clubhuis/filterPage" th:text="#{clubhuis.filter}"></a></li>
+                <li th:classappend="${current == 'clubhuis-filter' ? 'active' : ''}"><a href="/clubhuis/filterPage" th:text="#{clubhuis.filter}"></a></li>
             </ul>
         </div>
     </nav>

@@ -516,7 +516,7 @@ public class Controller {
     public String toFilterClubhuis(Model model){
 
             model.addAttribute("clean", false);
-            model.addAttribute("clubhuizen", new ArrayList<>());
+            //model.addAttribute("clubhuizen", new ArrayList<>());
 
         return "clubhuis-filter";
     }
