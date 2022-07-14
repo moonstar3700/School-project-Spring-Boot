@@ -46,6 +46,10 @@ public class ClubhuisBuilder {
         return aclubhuis().withName("another").withEmail("another@email.be").withGemeente("anotherGemeente").withMaxMembers(20);
     }
 
+    public static ClubhuisBuilder aValidYetAnotherClubhuisTestHuis(){
+        return aclubhuis().withName("another").withEmail("another@email.be").withGemeente("ssssss").withMaxMembers(20);
+    }
+
     public static ClubhuisBuilder anIvalidClubhuisWithNoNameTestHuis(){
         return aclubhuis().withName("").withEmail("valid@email.be").withGemeente("validGemeente").withMaxMembers(20);
     }
@@ -69,6 +73,7 @@ public class ClubhuisBuilder {
     public static ClubhuisBuilder anIvalidClubhuisWithNotAEmailTestHuis(){
         return aclubhuis().withName("valid").withEmail("invalidemail.be").withGemeente("validGemeente").withMaxMembers(20);
     }
+
 
     public Clubhuis build(){
         Clubhuis clubhuis = new Clubhuis();
