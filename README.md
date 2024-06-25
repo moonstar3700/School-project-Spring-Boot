@@ -89,12 +89,3 @@ The project emphasizes writing clean code and following the Model-View-Controlle
 4. **Delete a Coin:**
    - **URL:** `http://localhost:8080/api/coin/delete/{coin id}`
    - **Method:** DELETE
-
-
-## Acknowledgements
-
-This project is created for educational purposes to understand the basics of web application development using Spring Boot, focusing on MVC architecture and clean coding practices.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
